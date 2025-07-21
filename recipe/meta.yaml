@@ -22,6 +22,7 @@ requirements:
     - wheel
     - setuptools
     - versioneer
+    - tomli  # [py<311]
   run:
     - python
     - numpy
