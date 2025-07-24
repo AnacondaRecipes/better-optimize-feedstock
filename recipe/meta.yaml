@@ -1,47 +1,60 @@
 {% set name = "better-optimize" %}
 {% set version = "0.1.5" %}
-{% set python_min = "3.10" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/better_optimize-{{ version }}.tar.gz
-  sha256: 1fa028b38b17154fe48de8d3dbd076688683b223ae9c625710e9539c9db9224c
+  url: https://github.com/jessegrabowski/{{ name.replace('-', '_')}}/archive/refs/tags/v{{ version }}.tar.gz
+  sha256: 64cddaa95ca005e9a834f59b09a63b1d20c0772d0d730b750acf3ecfe0cf06fe
 
 build:
-  noarch: python
-  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   number: 0
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  skip: True  # [py<310 or py>313]
 
 requirements:
   host:
-    - python {{ python_min }}
-    - numpy
+    - pip
+    - python
+    - numpy {{ numpy }}
+    - wheel
     - setuptools
     - versioneer
-    - pip
+    - tomli  # [py<311]
   run:
-    - python >={{ python_min }},<3.14
+    - python
     - numpy
     - scipy >=1.15
     - rich
 
 test:
+  source_files:
+    - tests
   imports:
     - better_optimize
   commands:
     - pip check
+    - pytest -v tests
   requires:
-    - python {{ python_min }}
     - pip
+    - pytest
 
 about:
   home: https://github.com/jessegrabowski/better_optimize
   summary: A drop-in replacement for scipy optimize functions with quality of life improvements
   license: MIT
+  license_family: MIT
   license_file: LICENSE
+  description: |
+    better_optimize is a friendlier front-end to scipy's optimize.minimize and optimize.root functions. 
+    Features include:
+      - Progress bar!
+      - Early stopping!
+      - Better propagation of common arguments (maxiters, tol)!
+  dev_url: https://github.com/jessegrabowski/better_optimize
+  doc_url: https://github.com/jessegrabowski/better_optimize/blob/main/README.md
 
 extra:
   recipe-maintainers:
