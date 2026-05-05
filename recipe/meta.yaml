@@ -1,5 +1,5 @@
 {% set name = "better-optimize" %}
-{% set version = "0.1.5" %}
+{% set version = "0.4.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,12 +7,12 @@ package:
 
 source:
   url: https://github.com/jessegrabowski/{{ name.replace('-', '_')}}/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: 64cddaa95ca005e9a834f59b09a63b1d20c0772d0d730b750acf3ecfe0cf06fe
+  sha256: 2de9e8dfcc36843af112b931c0b1d60f5542b6148f605b5e74c8e4a1593276b9
 
 build:
   number: 0
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  skip: True  # [py<310 or py>313]
+  skip: true  # [py<310 or py>313]
 
 requirements:
   host:
@@ -48,11 +48,11 @@ about:
   license_family: MIT
   license_file: LICENSE
   description: |
-    better_optimize is a friendlier front-end to scipy's optimize.minimize and optimize.root functions. 
+    better_optimize is a friendlier front-end to scipy's optimize.minimize and optimize.root functions.
     Features include:
-      - Progress bar!
-      - Early stopping!
-      - Better propagation of common arguments (maxiters, tol)!
+    - Progress bar!
+    - Early stopping!
+    - Better propagation of common arguments (maxiters, tol)!
   dev_url: https://github.com/jessegrabowski/better_optimize
   doc_url: https://github.com/jessegrabowski/better_optimize/blob/main/README.md
 
