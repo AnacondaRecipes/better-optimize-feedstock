@@ -12,7 +12,7 @@ source:
 build:
   number: 0
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  skip: true  # [py<310 or py>313]
+  skip: true  # [py<312 or py>313]
 
 requirements:
   host:
@@ -28,6 +28,9 @@ requirements:
     - numpy
     - scipy >=1.15
     - rich
+    - threadpoolctl
+    - joblib
+    - pandas
 
 test:
   source_files:
