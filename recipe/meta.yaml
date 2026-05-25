@@ -1,5 +1,5 @@
 {% set name = "better-optimize" %}
-{% set version = "0.4.1" %}
+{% set version = "0.4.2" %}
 
 package:
   name: {{ name|lower }}
@@ -7,22 +7,20 @@ package:
 
 source:
   url: https://github.com/jessegrabowski/{{ name.replace('-', '_')}}/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: 2de9e8dfcc36843af112b931c0b1d60f5542b6148f605b5e74c8e4a1593276b9
+  sha256: 119e4764926bfa1a47f016586f094696f680b5faeb80dee9bad59bb3736259ea
 
 build:
   number: 0
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  skip: true  # [py<312 or py>313]
+  skip: true  # [py<312]
 
 requirements:
   host:
     - pip
     - python
     - numpy {{ numpy }}
-    - wheel
     - setuptools
     - versioneer
-    - tomli  # [py<311]
   run:
     - python
     - numpy
