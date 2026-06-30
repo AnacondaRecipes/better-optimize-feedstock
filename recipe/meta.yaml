@@ -24,7 +24,8 @@ requirements:
   run:
     - python
     - numpy
-    - scipy >=1.15
+    # E  AssertionError: missing options: disp, iprint
+    - scipy >=1.15,<1.16
     - rich
     - threadpoolctl
     - joblib
