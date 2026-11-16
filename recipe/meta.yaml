@@ -1,13 +1,13 @@
 {% set name = "better-optimize" %}
-{% set version = "0.4.2" %}
+{% set version = "0.5.1" %}
 
 package:
-  name: {{ name|lower }}
+  name: {{ name }}
   version: {{ version }}
 
 source:
   url: https://github.com/jessegrabowski/{{ name.replace('-', '_')}}/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: 119e4764926bfa1a47f016586f094696f680b5faeb80dee9bad59bb3736259ea
+  sha256: adad81d2d0fe714ad2953d54ea7561dd8b7cc862da7f95da1ebc9bba128ed70c
 
 build:
   number: 0
@@ -24,10 +24,10 @@ requirements:
   run:
     - python
     - numpy
-    - scipy >=1.15
+    - scipy >=1.18
     - rich
     - threadpoolctl
-    - joblib
+    - joblib >=1.4
     - pandas
 
 test:
@@ -37,7 +37,7 @@ test:
     - better_optimize
   commands:
     - pip check
-    - pytest -v tests
+    - pytest -vv tests
   requires:
     - pip
     - pytest
